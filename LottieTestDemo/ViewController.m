@@ -15,6 +15,8 @@
     UIView *_detailView;
     
     NSInteger _fileIndex;
+    
+    UIButton *_fillBtn;
 }
 
 @property (nonatomic, strong) LOTAnimationView *animationView;
@@ -34,9 +36,9 @@
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
     
-    int n = 4;
+    NSArray *titles = @[@"上一个", @"背景色", @"填充模式", @"播放/暂停"];
+    int n = (int)titles.count;
     CGFloat itemWidth = (width - 10 * n - 10) / n;
-    NSArray *titles = @[@"上一个", @"背景色", @"填充模式", @"下一个"];
     
     while (n > 0) {
         int i = n - 1;
@@ -48,6 +50,9 @@
         btn.tag = i;
         [btn setTitle:titles[i] forState:UIControlStateNormal];
         [self.view addSubview:btn];
+        if (i == 2) {
+            _fillBtn = btn;
+        }
         n --;
     }
     
@@ -95,8 +100,15 @@
             break;
         case 3:
         {
-            _fileIndex ++;
-            [self playAnimation];
+            if (_animationView) {
+                if (_animationView.isAnimationPlaying) {
+                    [_animationView pause];
+                } else {
+                    [_animationView play];
+                }
+            } else {
+                [self playAnimation];
+            }
         }
             break;
             
@@ -110,8 +122,16 @@
     if (_fileIndex < 0) {
         _fileIndex = 0;
     }
+    
     NSString *path = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"animation"];
-    NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+    static NSArray *contents = nil;
+    if (!contents) {
+        contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+        contents = [contents sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            return [obj1 compare:obj2];
+        }];
+    }
+    
     if (contents.count) {
         NSInteger i = _fileIndex % (contents.count);
         NSString *fileName = contents[i];
@@ -146,15 +166,11 @@
         NSString *fileName = [filePath lastPathComponent];
         _fileNameLabel.text = [NSString stringWithFormat:@"%@ (%@)", fileName, [self.class fileSize:filePath]];
     } else {
-        if (_animationView) {
-            if (_animationView.isAnimationPlaying) {
-                [_animationView pause];
-            } else {
-                [_animationView play];
-            }
-        } else {
-            [self playAnimation];
+        if (_animationView.isAnimationPlaying) {
+            _fileIndex ++;
         }
+        
+        [self playAnimation];
     }
 }
 
@@ -216,13 +232,25 @@
         _animationView.loopAnimation = YES;
     }
     
-    if ([path rangeOfString:@"adrock"].length) {
+    if ([path rangeOfString:@"adrock"].length || [path rangeOfString:@"Logo1"].length) {
         _animationView.contentMode = UIViewContentModeScaleAspectFill;
+        _fillBtn.selected = YES;
     } else {
         _animationView.contentMode = UIViewContentModeScaleAspectFit;
+        _fillBtn.selected = NO;
     }
     
+    [self showSwitchDetail:path];
+    
+    [_animationView playToProgress:1.0 withCompletion:^(BOOL animationFinished) {
+        NSLog(@"###animationFinished");
+    }];
+}
+
+- (void)showSwitchDetail:(NSString *)path
+{
     if ([path rangeOfString:@"witch"].length) {
+        LOTComposition *sceneModel = [LOTComposition animationWithFilePath:path];
         if (!_detailView) {
             _detailView = [[UIView alloc] initWithFrame:CGRectMake(0, 40, 300, 100)];
             _detailView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -294,10 +322,6 @@
             _detailView.hidden = YES;
         }
     }
-    
-    [_animationView playToProgress:1.0 withCompletion:^(BOOL animationFinished) {
-        NSLog(@"###animationFinished");
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

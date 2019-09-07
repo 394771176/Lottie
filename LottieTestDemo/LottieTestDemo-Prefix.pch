@@ -1,0 +1,17 @@
+//
+//  LottieTestDemo-Prefix.pch
+//  LottieTestDemo
+//
+//  Created by cheng on 2019/9/7.
+//  Copyright © 2019 cheng. All rights reserved.
+//
+
+#ifndef LottieTestDemo_Prefix_pch
+#define LottieTestDemo_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+//#import "LottieTestDemo-Swift.h"
+
+#endif /* LottieTestDemo_Prefix_pch */

@@ -14,6 +14,7 @@
 		601A5FE8231A606A003C23E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 601A5FE6231A606A003C23E0 /* LaunchScreen.storyboard */; };
 		601A5FEB231A606A003C23E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A5FEA231A606A003C23E0 /* main.m */; };
 		601A601B231D5594003C23E0 /* animation in Resources */ = {isa = PBXBuildFile; fileRef = 601A601A231D5593003C23E0 /* animation */; };
+		6025C6AC232377AF001EB425 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025C6AB232377AF001EB425 /* TestViewController.swift */; };
 		C3D88CD9DB3BE37CB8A158C9 /* Pods_LottieTestDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7B6C755D9B90FDF3C041C32 /* Pods_LottieTestDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,9 @@
 		601A5FE9231A606A003C23E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		601A5FEA231A606A003C23E0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		601A601A231D5593003C23E0 /* animation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animation; sourceTree = "<group>"; };
+		6025C6AA232377AE001EB425 /* LottieTestDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LottieTestDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		6025C6AB232377AF001EB425 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		6025C6AD23237818001EB425 /* LottieTestDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LottieTestDemo-Prefix.pch"; sourceTree = "<group>"; };
 		F7B6C755D9B90FDF3C041C32 /* Pods_LottieTestDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LottieTestDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -79,12 +83,15 @@
 				601A5FDC231A6069003C23E0 /* AppDelegate.m */,
 				601A5FDE231A6069003C23E0 /* ViewController.h */,
 				601A5FDF231A6069003C23E0 /* ViewController.m */,
+				6025C6AB232377AF001EB425 /* TestViewController.swift */,
 				601A5FE1231A606A003C23E0 /* Main.storyboard */,
 				601A5FE4231A606A003C23E0 /* Assets.xcassets */,
 				601A5FE6231A606A003C23E0 /* LaunchScreen.storyboard */,
 				601A5FE9231A606A003C23E0 /* Info.plist */,
 				601A5FEA231A606A003C23E0 /* main.m */,
 				601A601A231D5593003C23E0 /* animation */,
+				6025C6AA232377AE001EB425 /* LottieTestDemo-Bridging-Header.h */,
+				6025C6AD23237818001EB425 /* LottieTestDemo-Prefix.pch */,
 			);
 			path = LottieTestDemo;
 			sourceTree = "<group>";
@@ -131,6 +138,7 @@
 				TargetAttributes = {
 					601A5FD7231A6069003C23E0 = {
 						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 1030;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -213,6 +221,7 @@
 			files = (
 				601A5FE0231A6069003C23E0 /* ViewController.m in Sources */,
 				601A5FEB231A606A003C23E0 /* main.m in Sources */,
+				6025C6AC232377AF001EB425 /* TestViewController.swift in Sources */,
 				601A5FDD231A6069003C23E0 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,11 +357,17 @@
 			baseConfigurationReference = 44C966E004B11B295F714751 /* Pods-LottieTestDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LottieTestDemo/LottieTestDemo-Prefix.pch";
 				INFOPLIST_FILE = LottieTestDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lilu.LottieTestDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LottieTestDemo/LottieTestDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -362,11 +377,16 @@
 			baseConfigurationReference = 4212FD15D51A707DEF8D5AAB /* Pods-LottieTestDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LottieTestDemo/LottieTestDemo-Prefix.pch";
 				INFOPLIST_FILE = LottieTestDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lilu.LottieTestDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LottieTestDemo/LottieTestDemo-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
