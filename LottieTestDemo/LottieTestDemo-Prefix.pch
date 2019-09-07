@@ -12,6 +12,9 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
-//#import "LottieTestDemo-Swift.h"
+/*
+ 导入这个头文件，所有的swift 类都可以直接用了
+ */
+#import "LottieTestDemo-Swift.h"
 
 #endif /* LottieTestDemo_Prefix_pch */
